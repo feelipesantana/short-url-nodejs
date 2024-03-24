@@ -1,6 +1,7 @@
 import { FastifyInstance } from "fastify";
 import z from "zod";
 import { sql } from "../lib/postgres";
+import { redis } from "../lib/redis";
 
 export async function getCode(app:FastifyInstance){
     app.get('/:code', async (request, reply) =>{
@@ -18,9 +19,11 @@ export async function getCode(app:FastifyInstance){
             return reply.status(400).send({message : "Link not found"})
         }
         const link = result[0]
+        console.log(link)
+        await redis.zIncrBy('metrics', 1, String(link.id));
+
         //301 - Permanente
         //302 - Temporário
-
         return reply.redirect(308, link.original_url);
     })
 }

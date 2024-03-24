@@ -12,4 +12,8 @@ GET http://localhost:3333/links
 
 ###
 
-GET http://localhost:3333/google321312
+GET http://localhost:3333/google
+
+###
+
+GET http://localhost:3333/api/metrics

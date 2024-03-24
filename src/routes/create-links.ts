@@ -4,7 +4,7 @@ import { sql } from "../lib/postgres";
 import postgres from "postgres";
 
 export async function createLinks(app: FastifyInstance){
-    app.post('/links', async (request, reply) =>{
+    app.post('/api/links', async (request, reply) =>{
         const createSchema = z.object({
             code: z.string().min(3),
             url: z.string().url(),
